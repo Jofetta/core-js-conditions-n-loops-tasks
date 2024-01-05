@@ -21,8 +21,11 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  if (number < 0) {
+    return false;
+  }
+  return true;
 }
 
 /**
@@ -38,8 +41,14 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  if (a > b && a > c) {
+    return a;
+  }
+  if (b > a && b > c) {
+    return b;
+  }
+  return c;
 }
 
 /**
@@ -60,8 +69,14 @@ function getMaxNumber(/* a, b, c */) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  if (queen.x === king.x || queen.y === king.y) {
+    return true;
+  }
+  if (Math.abs(queen.x - king.x) === Math.abs(queen.y - king.y)) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -82,8 +97,23 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  const max = getMaxNumber(a, b, c);
+  let min;
+  if (a <= b && a <= c) {
+    min = a;
+  } else if (b <= a && b <= c) {
+    min = b;
+  } else {
+    min = c;
+  }
+  if (min === 0 || max >= min * 2) {
+    return false;
+  }
+  if (a === b || a === c || b === c) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -100,8 +130,30 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  let leftNum = num;
+  let result = '';
+  while (leftNum >= 10) {
+    result += 'X';
+    leftNum -= 10;
+  }
+  if (leftNum === 9) {
+    result += 'IX';
+    leftNum -= 9;
+  }
+  if (leftNum >= 5) {
+    result += 'V';
+    leftNum -= 5;
+  }
+  if (leftNum === 4) {
+    result += 'IV';
+    leftNum -= 4;
+  }
+  while (leftNum > 0) {
+    result += 'I';
+    leftNum -= 1;
+  }
+  return result;
 }
 
 /**
